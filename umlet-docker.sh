@@ -14,4 +14,4 @@
 # Run umlet and convert the given file in the current directory as the given user
 exec docker run --name umlet-docker --rm -i --user="$(id -u $1):$(id -g $1)" \
 --net=none -v "$PWD:/data" egeldenhuys/umlet-docker \
-java -jar umlet.jar -action=convert -format=png -filename="/data/$2" -output="/data/$3"
+java -jar umlet.jar -action=convert -format=$2 -filename="/data/$3" -output="/data/$4"
