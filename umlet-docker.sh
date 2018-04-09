@@ -3,12 +3,15 @@
 # Modified from:
 # https://github.com/devng/pdflatex-docker/blob/master/pdflatex-docker.sh
 
-# Usage:
 # NOTE: Files need to be in current dir
-# umlet-docker.sh <username> <input file> <output file>
-# umlet-docker.sh evert mahImage.uxf mahImage.png
 
-# Runs the pdflatex container and mounts the current working dir as a vloueme of
-# the container
+# Usage:
+# umlet-docker.sh <username> <format> <input file> <output file>
 
-exec docker run --name umlet-docker --rm -i --user="$(id -u $1):$(id -g $1)" --net=none -v "$PWD:/data" egeldenhuys/umlet-docker java -jar umlet.jar -action=convert -format=png -filename="/data/$2" -output="/data/$3"
+# Example:
+# umlet-docker.sh evert png mahImage.uxf mahImage.png
+
+# Run umlet and convert the given file in the current directory as the given user
+exec docker run --name umlet-docker --rm -i --user="$(id -u $1):$(id -g $1)" \
+--net=none -v "$PWD:/data" egeldenhuys/umlet-docker \
+java -jar umlet.jar -action=convert -format=png -filename="/data/$2" -output="/data/$3"
